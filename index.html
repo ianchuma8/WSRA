@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watu Smart Repayment Assistant (WSRA)</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#f4f7fb;
+      color:#222;
+      line-height:1.6;
+    }
+
+    header{
+      background:linear-gradient(135deg,#0b5ed7,#003b8b);
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+    }
+
+    header h1{
+      font-size:40px;
+    }
+
+    nav{
+      background:#012b63;
+      padding:15px;
+      text-align:center;
+    }
+
+    nav a{
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    section{
+      width:90%;
+      margin:20px auto;
+      background:white;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      color:#0b5ed7;
+      margin-bottom:15px;
+    }
+
+    input, button{
+      padding:10px;
+      margin:8px 0;
+      width:100%;
+      max-width:400px;
+    }
+
+    button{
+      background:#0b5ed7;
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    button:hover{
+      background:#003b8b;
+    }
+
+    .card{
+      background:#f8fbff;
+      padding:15px;
+      margin-top:10px;
+      border-left:5px solid #0b5ed7;
+      border-radius:8px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:15px;
+    }
+
+    table th, table td{
+      border:1px solid #ccc;
+      padding:10px;
+    }
+
+    table th{
+      background:#0b5ed7;
+      color:white;
+    }
+
+    .sms-box{
+      background:#eef5ff;
+      padding:10px;
+      margin-top:10px;
+      border-left:4px solid #0b5ed7;
+      border-radius:6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Watu Smart Repayment Assistant (WSRA)</h1>
+  <p>Risk-based repayment monitoring & SMS automation system</p>
+</header>
+
+<nav>
+  <a href="#form">Form</a>
+  <a href="#result">Result</a>
+  <a href="#history">History</a>
+  <a href="#story">Story</a>
+</nav>
+
+<!-- FORM -->
+<section id="form">
+  <h2>Customer Input</h2>
+
+  <form method="POST">
+    <input type="text" name="name" placeholder="Customer Name" required><br>
+    <input type="text" name="phone" placeholder="Phone Number" required><br>
+    <input type="number" name="missed" placeholder="Missed Payments" required><br>
+    <button type="submit">Analyze Risk</button>
+  </form>
+</section>
+
+<!-- RESULT -->
+<section id="result">
+  <h2>Live Risk Result</h2>
+
+  {% if risk %}
+    <div class="card">
+      <h3>{{ risk }}</h3>
+    </div>
+  {% else %}
+    <p>No analysis yet. Submit a customer form.</p>
+  {% endif %}
+
+  {% if sms %}
+    <div class="sms-box">
+      <h3>SMS Sent</h3>
+      <p>{{ sms }}</p>
+    </div>
+  {% endif %}
+</section>
+
+<!-- HISTORY -->
+<section id="history">
+  <h2>SMS History</h2>
+
+  <table>
+    <tr>
+      <th>Phone</th>
+      <th>Risk</th>
+      <th>SMS</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+      <td>{{ item.phone }}</td>
+      <td>{{ item.risk }}</td>
+      <td>{{ item.sms }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<!-- STORY / PROJECT EXPLANATION -->
+<section id="story">
+
+  <h2>Problem Statement</h2>
+  <p>
+    Many daily-paying customers miss or delay repayments, increasing loan default risk and operational costs.
+  </p>
+
+  <h2>Solution</h2>
+  <p>
+    WSRA automates repayment monitoring, assigns risk levels, and sends SMS alerts to improve repayment behavior.
+  </p>
+
+  <h2>Workflow</h2>
+  <p>
+    Customer input → Risk analysis → SMS generation → Alert sending → History tracking
+  </p>
+
+  <h2>Risk Assessment</h2>
+  <p>
+    Low Risk: 0 missed payments<br>
+    Medium Risk: 1 missed payment<br>
+    High Risk: 2+ missed payments
+  </p>
+
+  <h2>SMS Alerts</h2>
+  <p>
+    Automated messages are sent based on customer repayment behavior.
+  </p>
+
+  <h2>Experiment Plan</h2>
+  <p>
+    Pilot WSRA for 4–6 weeks and measure repayment improvement and customer engagement.
+  </p>
+
+  <h2>Milestones</h2>
+  <p>
+    Week 1: Setup<br>
+    Week 2: Integration<br>
+    Week 3: Testing<br>
+    Week 4: Deployment
+  </p>
+
+</section>
+
+</body>
+</html>
